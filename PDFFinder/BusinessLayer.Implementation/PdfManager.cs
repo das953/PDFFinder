@@ -12,6 +12,11 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public class PdfManager : IPdfManager
     {
+        private Model_PDFFinder context;
+        public PdfManager()
+        {
+            context = new Model_PDFFinder();
+        }
         public IPdfAnalizer Analizer
         {
             get
@@ -58,7 +63,9 @@ namespace PDFFinder.BusinessLayer.Implementation
         public void Execute(string fileName)
         {
             string title = Parser.Parse(fileName);
-            bool availableForPrinting = Analizer.AvailableForPrinting(title);
+            //Временная заглушка (названия процесса)
+            string processName = "Some process name";
+            bool availableForPrinting = Analizer.AvailableForPrinting(title, context);
             if (availableForPrinting)
             {
                 Printer.Print(fileName);
@@ -66,7 +73,7 @@ namespace PDFFinder.BusinessLayer.Implementation
             }
             else
             {
-                Viewer.View(fileName);
+                Viewer.View(fileName, processName);
                 Logger.LogOpenForView();
             }
         }

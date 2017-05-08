@@ -7,6 +7,6 @@
     /// </summary>
     public interface IPdfAnalizer
     {
-        bool AvailableForPrinting(string metaData);
+        bool AvailableForPrinting(string metaData, Model_PDFFinder context);
     }
 }
