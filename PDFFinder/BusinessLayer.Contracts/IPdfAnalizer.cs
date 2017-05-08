@@ -7,6 +7,6 @@
     /// </summary>
     public interface IPdfAnalizer
     {
-        bool AvailableForPrinting(string metaData, Model_PDFFinder context);
+        Report_Template GetPrinterSettings(string metaData, Model_PDFFinder context);
     }
 }

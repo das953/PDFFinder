@@ -65,10 +65,10 @@ namespace PDFFinder.BusinessLayer.Implementation
             string title = Parser.Parse(fileName);
             //Временная заглушка (названия процесса)
             string processName = "Some process name";
-            bool availableForPrinting = Analizer.AvailableForPrinting(title, context);
-            if (availableForPrinting)
+            Report_Template printerSettings = Analizer.GetPrinterSettings(title, context);
+            if (printerSettings!=null)
             {
-                Printer.Print(fileName);
+                Printer.Print(fileName, printerSettings);
                 Logger.LogOpenForPrinting();
             }
             else

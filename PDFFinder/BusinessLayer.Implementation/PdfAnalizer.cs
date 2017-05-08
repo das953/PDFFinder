@@ -12,7 +12,7 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public class PdfAnalizer : IPdfAnalizer
     {
-        public bool AvailableForPrinting(string metaData, Model_PDFFinder context)
+        public Report_Template GetPrinterSettings(string metaData, Model_PDFFinder context)
         {
             throw new NotImplementedException();
         }

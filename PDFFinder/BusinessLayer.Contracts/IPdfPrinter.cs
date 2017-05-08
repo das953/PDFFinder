@@ -5,6 +5,6 @@
     /// </summary>
     public interface IPdfPrinter
     {
-        void Print(string fileName);
+        void Print(string fileName, Report_Template printerSettings);
     }
 }
