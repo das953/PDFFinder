@@ -38,7 +38,5 @@ namespace PDFFinder.BusinessLayer.Implementation
             };
             return printerSettings;
         }
-
-        
     }
 }

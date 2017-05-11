@@ -30,11 +30,13 @@ namespace PDFFinder
         {
             ApplicationList = new ObservableCollection<AppDescription>(GetAssociatedApplications("pdf"));
             InitializeComponent();
-        }
+            PdfPrinter printer = new PdfPrinter();
+            printer.Print("text.pdf", null);
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            ApplicationList.RemoveAt(0);
+            //PdfParser parser = new PdfParser();
+            //parser.Parse("text.pdf");
+            //MessageBox.Show(parser.MetaTitle);
+            
         }
 
         private IEnumerable<AppDescription> GetAssociatedApplications(string ext)

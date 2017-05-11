@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PDFFinder.BusinessLayer.Implementation;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -22,6 +23,8 @@ namespace PDFFinder
             else
             {
                 MessageBox.Show("Without parameters");
+                PdfParser parser = new PdfParser();
+                MessageBox.Show(parser.Parse("text.pdf"));
             }
         }
     }
