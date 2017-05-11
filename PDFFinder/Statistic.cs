@@ -11,10 +11,8 @@ namespace PDFFinder
         [Key]
         [StringLength(12)]
         public string group_name { get; set; }
-
-           
-            
-         
         public int processed_files_count { get; set; }
+
+
     }
 }
