@@ -4,17 +4,29 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\Users\das953\Source\Repos\PDFFinder\PDFFinder\obj\Debug\
+=======
+C:\Users\igor7\Projects\PDFFinder\PDFFinder\obj\Debug\
+>>>>>>> 824e2a66a7896e1fbf2bb0e7170d572b0e34ce98
 PDFFinder
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\Users\das953\Source\Repos\PDFFinder\PDFFinder\App.xaml
 11151548125
 
 2522336443
 18-1219676562
+=======
+C:\Users\igor7\Projects\PDFFinder\PDFFinder\App.xaml
+11151548125
+
+25745613077
+18528487497
+>>>>>>> 824e2a66a7896e1fbf2bb0e7170d572b0e34ce98
 MainWindow.xaml;
 
-True
+False
 

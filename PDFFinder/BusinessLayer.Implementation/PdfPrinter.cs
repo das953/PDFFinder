@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
+    /// <summary>
+    /// Служит для печати файла - Панибратюк Александр
+    /// </summary>
     public class PdfPrinter
     {
-        public void Print(string fileName)
+        public void Print(string fileName, Report_Template printerSettings)
         {
             throw new NotImplementedException();
         }
