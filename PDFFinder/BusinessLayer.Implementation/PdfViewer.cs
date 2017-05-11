@@ -1,9 +1,11 @@
 ﻿using PDFFinder.BusinessLayer.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
@@ -14,7 +16,9 @@ namespace PDFFinder.BusinessLayer.Implementation
     {
         public void View(string fileName, string processName)
         {
-            throw new NotImplementedException();
+           
+            Process.Start(processName, fileName);
+            
         }
     }
 }

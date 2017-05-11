@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Diagnostics;
+using PDFFinder.BusinessLayer.Implementation;
 
 namespace PDFFinder
 {
@@ -16,16 +17,15 @@ namespace PDFFinder
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args.Length == 1)
+            if(e.Args.Length==1)
             {
-                //PROCESSname
-                //e.Args[1] - filename
-                string ProcessName = null;
-                string FileName = null;
-                Process.Start(ProcessName, FileName);
-                
+                PdfViewer pdfViewer = new PdfViewer();
+                pdfViewer.View(null, e.Args[1]);
             }
-           
+            else
+            {
+                MessageBox.Show("Without parameters");
+            }
         }
     }
 }
