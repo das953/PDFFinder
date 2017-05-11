@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Diagnostics;
 
 namespace PDFFinder
 {
@@ -15,14 +16,16 @@ namespace PDFFinder
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-            if(e.Args.Length==1)
+            if (e.Args.Length == 1)
             {
-                MessageBox.Show("Parameters");
+                //PROCESSname
+                //e.Args[1] - filename
+                string ProcessName = null;
+                string FileName = null;
+                Process.Start(ProcessName, FileName);
+                
             }
-            else
-            {
-                MessageBox.Show("Without parameters");
-            }
+           
         }
     }
 }
