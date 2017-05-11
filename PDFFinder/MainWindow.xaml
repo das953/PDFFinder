@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFFinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="PDF Finder" Height="Auto" Width="425"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" SizeToContent="Height">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Recommended Applications" HorizontalAlignment="Center" Margin="0,10" FontSize="16"></TextBlock>
+        <ListView x:Name="listViewApps" Grid.Row="1" ItemsSource="{Binding ApplicationList}" BorderThickness="0" Margin="20 0 0 30" SelectionChanged="listViewApps_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <Image Source="{Binding Icon}" Margin="0 0 20 0"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

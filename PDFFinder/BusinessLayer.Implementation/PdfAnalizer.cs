@@ -14,7 +14,31 @@ namespace PDFFinder.BusinessLayer.Implementation
     {
         public Report_Template GetPrinterSettings(string metaData, Model_PDFFinder context)
         {
-            throw new NotImplementedException();
+            Report_Template report = context.Report_Template.Where(x => x.report_name == metaData).FirstOrDefault();
+            if (report != null)
+                return report;
+            Group_Template group = context.Group_Template.Where(x => metaData.Contains(x.group_name)).FirstOrDefault();
+            if(group==null)
+                return null;
+            List<Report_Template> reports = context.Report_Template.Where(x => x.report_name.Contains(group.group_name)).ToList();
+
+            Report_Template defaultReport = reports.First();
+
+            string printerName = reports.All(x => x.printer_name == defaultReport.printer_name) ? defaultReport.printer_name : group.printer_name;
+            
+            bool? reportDuplex = reports.All(x => x.duplex == defaultReport.duplex) ? defaultReport.duplex : group.duplex;
+            
+            string paperFormat = reports.All(x => x.paper_format == defaultReport.paper_format) ? defaultReport.paper_format : group.paper_format;
+            Report_Template printerSettings = new Report_Template()
+            {
+                report_name = metaData,
+                printer_name = printerName,
+                duplex = reportDuplex,
+                paper_format = paperFormat
+            };
+            return printerSettings;
         }
+
+        
     }
 }

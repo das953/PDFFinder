@@ -13,5 +13,16 @@ namespace PDFFinder
     /// </summary>
     public partial class App : Application
     {
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            if(e.Args.Length==1)
+            {
+                MessageBox.Show("Parameters");
+            }
+            else
+            {
+                MessageBox.Show("Without parameters");
+            }
+        }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -72,12 +73,14 @@
     <Compile Include="BusinessLayer.Contracts\IPdfParser.cs" />
     <Compile Include="BusinessLayer.Contracts\IPdfPrinter.cs" />
     <Compile Include="BusinessLayer.Contracts\IPdfViewer.cs" />
+    <Compile Include="BusinessLayer.Implementation\AppDescription.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfAnalizer.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfLogger.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfManager.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfParser.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfPrinter.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfViewer.cs" />
+    <Compile Include="FileAssociationManager.cs" />
     <Compile Include="Report_Template.cs" />
     <Compile Include="Statistic.cs" />
     <Page Include="MainWindow.xaml">
