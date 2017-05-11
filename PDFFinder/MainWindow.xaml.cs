@@ -24,7 +24,8 @@ namespace PDFFinder
         {
             InitializeComponent();
 
-            MessageBox.Show("Ура ^_^");
+          
+            MessageBox.Show(Environment.GetCommandLineArgs()[1].ToString());
         }
     }
 }
