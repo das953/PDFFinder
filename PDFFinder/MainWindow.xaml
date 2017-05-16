@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PDFFinder"
         mc:Ignorable="d"
         Title="PDF Finder Configuration" Height="Auto" Width="425"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}" SizeToContent="Height">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" SizeToContent="Height" Icon="Resources/Ukraine-Flag.png">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Green"/>

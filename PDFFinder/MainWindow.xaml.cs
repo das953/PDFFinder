@@ -38,8 +38,8 @@ namespace PDFFinder
             AssociationManager = new FileAssociationManager();
             ApplicationList = new ObservableCollection<AppDescription>(AssociationManager.GetAssociatedApplications(".pdf"));
             DefaultApplication = AssociationManager.GetAssociatedApplication(".pdf");
+            App.Language = PDFFinder.Properties.Settings.Default.DefaultLanguage;
             InitializeComponent();
-            
         }
         
         private void listViewApps_SelectionChanged(object sender, SelectionChangedEventArgs e)

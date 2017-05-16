@@ -32,11 +32,21 @@ namespace PDFFinder
             m_Languages.Add(new CultureInfo("en-US")); //Нейтральная культура для этого проекта
             m_Languages.Add(new CultureInfo("ru-RU"));
             m_Languages.Add(new CultureInfo("uk-UA"));
+            App.LanguageChanged += App_LanguageChanged;
         }
 
-        
-        public static event EventHandler LanguageChanged;
 
+        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            Language = PDFFinder.Properties.Settings.Default.DefaultLanguage;
+        }
+
+        private void App_LanguageChanged(Object sender, EventArgs e)
+        {
+            PDFFinder.Properties.Settings.Default.DefaultLanguage = Language;
+            PDFFinder.Properties.Settings.Default.Save();
+        }
+        public static event EventHandler LanguageChanged;
         public static CultureInfo Language
         {
             get
@@ -82,7 +92,7 @@ namespace PDFFinder
                 }
 
                 //4. Вызываем евент для оповещения всех окон.
-                //LanguageChanged(Application.Current, new EventArgs());
+                LanguageChanged(Application.Current, new EventArgs());
             }
         }
 
