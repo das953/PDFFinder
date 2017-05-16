@@ -13,14 +13,14 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public class PdfLogger : IPdfLogger
     {
-        public void LogOpenForPrinting()
+        public void LogOpenForPrinting(string GroupName)
         {
-            throw new NotImplementedException();
+            DbDataLoad(GroupName);
         }
 
-        public void LogOpenForView()
+        public void LogOpenForView(string GroupName)
         {
-            throw new NotImplementedException();
+            DbDataLoad(GroupName);
         }
 
         void DbDataLoad(string GroupName)
@@ -48,7 +48,6 @@ namespace PDFFinder.BusinessLayer.Implementation
                 stat.SaveChanges();
             }
         }
-
         void PritnDataDb()
         {
             var stat = new Model_PDFFinder();

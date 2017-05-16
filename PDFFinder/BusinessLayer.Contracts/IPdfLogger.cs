@@ -2,7 +2,7 @@
 {
     public interface IPdfLogger
     {
-        void LogOpenForPrinting();
-        void LogOpenForView();
+        void LogOpenForPrinting(string GroupName);
+        void LogOpenForView(string GroupName);
     }
 }
