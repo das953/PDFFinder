@@ -11,13 +11,14 @@ using System.Windows.Controls;
 using System.Printing;
 using System.Windows.Documents;
 using System.Windows;
+using PDFFinder.BusinessLayer.Contracts;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
     /// <summary>
     /// Служит для печати файла - Панибратюк Александр
     /// </summary>
-    public class PdfPrinter
+    public class PdfPrinter : IPdfPrinter
     {
         public void Print(string fileName, Report_Template printerSettings)
         {

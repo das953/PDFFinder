@@ -1,4 +1,5 @@
-﻿using PDFFinder.BusinessLayer.Implementation;
+﻿using Microsoft.Win32;
+using PDFFinder.BusinessLayer.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +7,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,50 +30,30 @@ namespace PDFFinder
     public partial class MainWindow : Window
     {
         public ObservableCollection<AppDescription> ApplicationList { get; set; }
+        public AppDescription DefaultApplication { get; set; }
+        public FileAssociationManager AssociationManager { get; set; }
         public MainWindow()
         {
-            ApplicationList = new ObservableCollection<AppDescription>(GetAssociatedApplications("pdf"));
+            AssociationManager = new FileAssociationManager();
+            ApplicationList = new ObservableCollection<AppDescription>(AssociationManager.GetAssociatedApplications(".pdf"));
+            DefaultApplication = AssociationManager.GetAssociatedApplication(".pdf");
             InitializeComponent();
-            PdfPrinter printer = new PdfPrinter();
-            printer.Print("text.pdf", null);
-
-            //PdfParser parser = new PdfParser();
-            //parser.Parse("text.pdf");
-            //MessageBox.Show(parser.MetaTitle);
             
         }
-
-        private IEnumerable<AppDescription> GetAssociatedApplications(string ext)
-        {
-            List<AppDescription> applications = new List<AppDescription>();
-            FileAssociationManager manager = new FileAssociationManager();
-            IEnumerable<string> progIdList = manager.ListOfProgids(ext);
-            foreach (var progId in progIdList)
-            {
-                string appName = manager.GetApplicationName(progId);
-                string appPath = manager.GetApplicationPath(progId);
-                Icon appIcon = manager.ExtractIconFromFile(appPath);
-                ImageSource imageSource;
-                using (Bitmap bmp = appIcon.ToBitmap())
-                {
-                    var stream = new MemoryStream();
-                    bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                    imageSource = BitmapFrame.Create(stream);
-                }
-                applications.Add(new AppDescription { Name = appName, Path = appPath, Icon = imageSource });
-            }
-            return applications;
-        }
-
+        
         private void listViewApps_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedIndex = listViewApps.SelectedIndex;
             AppDescription app = ApplicationList[selectedIndex];
-            string programPath = app.Path;
-            Process proc = new Process();
+            AssociationManager.SaveAssociatedApplication(app.ProgId, ".pdf");
+            DefaultApplication = AssociationManager.GetAssociatedApplication(".pdf");
+            imgDefault.Source = DefaultApplication.Icon;
+            txtDefault.Text = DefaultApplication.Name;
+
+            /*Process proc = new Process();
             proc.StartInfo.FileName = programPath;
             proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(programPath);
-            proc.Start();
+            proc.Start();*/
         }
     }
 }

@@ -5,23 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFFinder"
         mc:Ignorable="d"
-        Title="PDF Finder" Height="Auto" Width="425"
+        Title="PDF Finder Configuration" Height="Auto" Width="425"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" SizeToContent="Height">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Recommended Applications" HorizontalAlignment="Center" Margin="0,10" FontSize="16"></TextBlock>
-        <ListView x:Name="listViewApps" Grid.Row="1" ItemsSource="{Binding ApplicationList}" BorderThickness="0" Margin="20 0 0 30" SelectionChanged="listViewApps_SelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <Image Source="{Binding Icon}" Margin="0 0 20 0"/>
-                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <TextBlock Text="Recommended Applications" HorizontalAlignment="Center" Margin="0,10" FontSize="16"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Current default viewer for PDFFinder</TextBlock>
+            <WrapPanel Margin="0,10" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding DefaultApplication}">
+                <Image x:Name="imgDefault" Source="{Binding Icon}" Margin="0 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                <TextBlock x:Name="txtDefault" Text="{Binding Name}" Margin="0,5,0,0"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Margin="20 0 20 30" Grid.Row="2">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" FontWeight="Bold">Select default application as viewer for PDFFinder</TextBlock>
+            <ListView x:Name="listViewApps" ItemsSource="{Binding ApplicationList}" BorderThickness="0" SelectionChanged="listViewApps_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Image Source="{Binding Icon}" Margin="0 0 20 0"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>
