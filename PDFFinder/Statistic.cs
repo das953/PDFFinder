@@ -5,6 +5,7 @@ namespace PDFFinder
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class Statistic
     {
@@ -13,6 +14,6 @@ namespace PDFFinder
         public string group_name { get; set; }
         public int processed_files_count { get; set; }
 
-
+        public string NoGroup { get; set; }
     }
 }
