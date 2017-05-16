@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -54,6 +55,24 @@ namespace PDFFinder
             proc.StartInfo.FileName = programPath;
             proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(programPath);
             proc.Start();*/
+        }
+
+        private void btnEng_Click(object sender, RoutedEventArgs e)
+        { 
+            CultureInfo ci = new CultureInfo("en-US");
+            App.Language = ci;
+        }
+
+        private void btnUa_Click(object sender, RoutedEventArgs e)
+        {
+            CultureInfo ci = new CultureInfo("uk-UA");
+            App.Language = ci;
+        }
+
+        private void btnRu_Click(object sender, RoutedEventArgs e)
+        {
+            CultureInfo ci = new CultureInfo("ru-RU");
+            App.Language = ci;
         }
     }
 }
