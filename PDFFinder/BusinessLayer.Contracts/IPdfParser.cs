@@ -5,6 +5,7 @@
     /// </summary>
     public interface IPdfParser
     {
+        string MetaTitle { get; set; }
         string Parse(string fileName);
     }
 }
