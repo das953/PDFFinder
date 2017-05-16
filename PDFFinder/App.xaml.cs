@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using PDFFinder.BusinessLayer.Implementation;
 
 namespace PDFFinder
 {
@@ -24,8 +26,8 @@ namespace PDFFinder
             }
             if(e.Args.Length==1)
             {
-                IPdfManager pdfManager = new PdfManager();
-                pdfManager.Execute(e.Args[0]);
+                PdfViewer pdfViewer = new PdfViewer();
+                pdfViewer.View(null, e.Args[1]);
             }
             else
             {

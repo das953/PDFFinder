@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
@@ -15,11 +16,9 @@ namespace PDFFinder.BusinessLayer.Implementation
     {
         public void View(string fileName, string processName)
         {
-            Process proc = new Process();
-            proc.StartInfo.FileName = processName;
-            proc.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(processName);
-            proc.StartInfo.Arguments = fileName;
-            proc.Start();
+           
+            Process.Start(processName, fileName);
+            
         }
     }
 }
