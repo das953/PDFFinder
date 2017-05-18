@@ -24,7 +24,7 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
             get
             {
-                throw new NotImplementedException();
+                return new PdfLogger();
             }
         }
 
@@ -67,12 +67,12 @@ namespace PDFFinder.BusinessLayer.Implementation
                 if (printerSettings != null)
                 {
                     Printer.Print(fileName, printerSettings);
-                    Logger.LogOpenForPrinting();
+                    Logger.LogOpenForPrinting(title);
                 }
                 else
                 {
                     Viewer.View(fileName, processName);
-                    //Logger.LogOpenForView();
+                    Logger.LogOpenForView(null);
                 }
             }
         }

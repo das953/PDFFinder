@@ -13,11 +13,11 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public class PdfLogger : IPdfLogger
     {
-        public void LogOpenForPrinting(string GroupName = "Coocies")
+        public void LogOpenForPrinting(string GroupName)
         {
             DbDataLoad(GroupName);
         }
-        public void LogOpenForView(string GroupName = "Coocies")
+        public void LogOpenForView(string GroupName)
         {
             DbDataLoad(GroupName);
         }
