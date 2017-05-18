@@ -4,4 +4,5 @@
     <v:String x:Key="m_appHeader">Налаштування додатку PDF Finder</v:String>
     <v:String x:Key="m_defViewer">Поточний переглядач файлів в PDF Finder</v:String>
     <v:String x:Key="m_listViewers">Обрати переглядач файлів в PDFFinder</v:String>
+    <v:String x:Key="btn_Stat">Статистика</v:String>
 </ResourceDictionary>

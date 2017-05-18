@@ -79,21 +79,21 @@ namespace PDFFinder
                 }
 
                 //3. Находим старую ResourceDictionary и удаляем его и добавляем новую ResourceDictionary
-                ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
+                ResourceDictionary oldDict = (from d in Current.Resources.MergedDictionaries
                                               where d.Source != null && d.Source.OriginalString.StartsWith("Resources/lang.")
                                               select d).First();
                 if (oldDict != null)
                 {
-                    int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
-                    Application.Current.Resources.MergedDictionaries.Remove(oldDict);
-                    Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
+                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDict);
+                    Current.Resources.MergedDictionaries.Remove(oldDict);
+                    Current.Resources.MergedDictionaries.Insert(ind, dict);
                 }
                 else
                 {
                     Application.Current.Resources.MergedDictionaries.Add(dict);
                 }
 
-                //4. Вызываем евент для оповещения всех окон.
+                //4. Вызываем ивент для оповещения всех окон.
                 LanguageChanged(Application.Current, new EventArgs());
             }
         }
@@ -109,10 +109,12 @@ namespace PDFFinder
             if(e.Args.Length==1)
             {
                 PdfViewer pdfViewer = new PdfViewer();
-                pdfViewer.View(null, e.Args[1]);
+                pdfViewer.View(null, e.Args[0]);
             }
             else
             {
+              //  PdfLogger logger = new PdfLogger();
+                
                 MainWindow config = new MainWindow();
                 config.Show();
             }

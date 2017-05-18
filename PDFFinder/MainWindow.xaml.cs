@@ -37,6 +37,7 @@ namespace PDFFinder
         {
             AssociationManager = new FileAssociationManager();
             ApplicationList = new ObservableCollection<AppDescription>(AssociationManager.GetAssociatedApplications(".pdf"));
+            
             if (ApplicationList.Count != 0)
             {
                 DefaultApplication = AssociationManager.GetAssociatedApplication(".pdf");
@@ -44,8 +45,14 @@ namespace PDFFinder
             
             App.Language = PDFFinder.Properties.Settings.Default.DefaultLanguage;
             InitializeComponent();
+            MessageBox.Show($"{DefaultApplication.Path}");
+
+            //Process.Start(DefaultApplication.Path, );
+
         }
+
         
+
         private void listViewApps_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedIndex = listViewApps.SelectedIndex;

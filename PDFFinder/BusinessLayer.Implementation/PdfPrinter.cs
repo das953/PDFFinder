@@ -21,7 +21,7 @@ namespace PDFFinder.BusinessLayer.Implementation
     public class PdfPrinter : IPdfPrinter
     {
         public void Print(string fileName, Report_Template printerSettings)
-        {
+        { 
             PdfDocument doc = new PdfDocument();
             doc.LoadFromFile(fileName);
             PrintDialog dialogPrint = new PrintDialog();
