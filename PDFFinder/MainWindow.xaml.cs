@@ -36,7 +36,12 @@ namespace PDFFinder
         {
             AssociationManager = new FileAssociationManager();
             ApplicationList = new ObservableCollection<AppDescription>(AssociationManager.GetAssociatedApplications(".pdf"));
-            DefaultApplication = AssociationManager.GetAssociatedApplication(".pdf");
+            if (ApplicationList.Count!=0)
+            {
+                DefaultApplication = AssociationManager.GetAssociatedApplication(".pdf"); 
+            }
+            BusinessLayer.Implementation.PdfLogger log = new PdfLogger();
+        
             InitializeComponent();
             
         }

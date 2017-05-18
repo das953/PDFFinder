@@ -131,6 +131,7 @@ namespace PDFFinder
             catch (Exception exception)
             {
                 throw exception;
+               
             }
         }
         #endregion

@@ -15,6 +15,9 @@ namespace PDFFinder.BusinessLayer.Implementation
     public class PdfParser : IPdfParser
     {
         public string MetaTitle;
+
+        string IPdfParser.MetaTitle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public string Parse(string fileName)
         {
             parsing(fileName);
