@@ -21,7 +21,8 @@ namespace PDFFinder.BusinessLayer.Implementation
         public string Parse(string fileName)
         {
             parsing(fileName);
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            return MetaTitle;
         }
 
         private void parsing(string filename)

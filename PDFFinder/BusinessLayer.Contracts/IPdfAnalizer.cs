@@ -1,5 +1,7 @@
 ﻿namespace PDFFinder.BusinessLayer.Contracts
 {
+    using Model;
+
     /// <summary>
     /// Анализирует метаданные файла. Функция bool AvailableForPrinting(string metaData)
     /// принимает строку метаданных (Title) и сравнивает ее с записями и группами в базе данных.

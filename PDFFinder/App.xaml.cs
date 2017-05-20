@@ -101,18 +101,25 @@ namespace PDFFinder
         
         void App_Startup(object sender, StartupEventArgs e)
         {
+
+
+            PdfManager man = new PdfManager();
+            string tmp = @"C:\Users\das953\Desktop\6f76b8df9d0716da74bb4ae6a900d483_1494864914.pdf";
+            man.Execute(tmp);
+
             if (e.Args.Length > 1)
             {
                 MessageBox.Show("Invalid parameters. The only parameter must be a file path", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Current.Shutdown();
                 return;
             }
             if(e.Args.Length==1)
             {
                 //                PdfLogger logger = new PdfLogger();
              //   PdfViewer pdfViewer = new PdfViewer();
-                PdfManager man = new PdfManager();
-                string tmp = @"C:\Users\das953\Desktop\6f76b8df9d0716da74bb4ae6a900d483_1494864914.pdf";
-                man.Execute(tmp);
+                //PdfManager man = new PdfManager();
+                //string tmp = @"C:\Users\das953\Desktop\6f76b8df9d0716da74bb4ae6a900d483_1494864914.pdf";
+                //man.Execute(tmp);
                 // man.Execute(e.Args[0]);
                 //   pdfViewer.View(null, e.Args[0]);
             }

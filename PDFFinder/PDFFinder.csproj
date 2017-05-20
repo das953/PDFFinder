@@ -92,8 +92,20 @@
     <Compile Include="BusinessLayer.Implementation\PdfPrinter.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfViewer.cs" />
     <Compile Include="FileAssociationManager.cs" />
-    <Compile Include="Report_Template.cs" />
-    <Compile Include="Statistic.cs" />
+    <Compile Include="Model\Group_Template.cs">
+      <DependentUpon>Model_PDFFinder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_PDFFinder.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_PDFFinder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Report_Template.cs">
+      <DependentUpon>Model_PDFFinder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Statistica.cs">
+      <DependentUpon>Model_PDFFinder.tt</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,7 +114,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Group_Template.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -121,7 +132,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model_PDFFinder.cs" />
+    <Compile Include="Model\Model_PDFFinder.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_PDFFinder.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_PDFFinder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_PDFFinder.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +160,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <EntityDeploy Include="Model\Model_PDFFinder.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_PDFFinder.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\Model_PDFFinder.edmx.diagram">
+      <DependentUpon>Model_PDFFinder.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -158,6 +185,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\United-Kingdom-flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\Model_PDFFinder.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_PDFFinder.edmx</DependentUpon>
+      <LastGenOutput>Model_PDFFinder.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\Model_PDFFinder.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_PDFFinder.edmx</DependentUpon>
+      <LastGenOutput>Model_PDFFinder.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

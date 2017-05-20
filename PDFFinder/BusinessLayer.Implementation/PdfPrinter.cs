@@ -15,6 +15,8 @@ using PDFFinder.BusinessLayer.Contracts;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
+
+    using Model;
     /// <summary>
     /// Служит для печати файла - Панибратюк Александр
     /// </summary>

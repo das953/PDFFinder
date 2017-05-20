@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
+    using Model;
+
     /// <summary>
     /// Анализирует метаданные файла. Функция bool AvailableForPrinting(string metaData) принимает строку метаданных (Title) и сравнивает ее с записями и группами в базе данных (context). Определяет или файл пригоден для печати.
     /// </summary>
