@@ -5,8 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFFinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="PDF Finder Configuration" Height="Auto" Width="425"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" SizeToContent="Height" Icon="Resources/Ukraine-Flag.png"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Opacity" Value="0.7"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Content="{DynamicResource btn_Stat}" HorizontalAlignment="Left" Margin="50,10,0,0" BorderThickness="0" Background="Transparent" FontWeight="Bold"/>
+
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,20,0">
+            <WrapPanel.Background>
+                <ImageBrush/>
+            </WrapPanel.Background>
+          
+            <Button x:Name="btnEng" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="25" Click="btnEng_Click" Margin="0,0,10,0" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/United-Kingdom-flag.png" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btnUa" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="30" Height="25" Margin="0,0,10,0" Click="btnUa_Click" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/Ukraine-Flag.png" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btnRu" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="30" Height="25" Click="btnRu_Click" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/Russia-Flag.png" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+        </WrapPanel>
+        <TextBlock Grid.Row="1" x:Name="appHeader" Text="{DynamicResource m_appHeader}" HorizontalAlignment="Center" Margin="0,10" FontSize="16"/>
+        <StackPanel Grid.Row="2">
+            <TextBlock x:Name="defViewer" Text="{DynamicResource m_defViewer}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <WrapPanel Margin="0,10" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding DefaultApplication}">
+                <Image x:Name="imgDefault" Source="{Binding Icon}" Margin="0 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                <TextBlock x:Name="txtDefault" Text="{Binding Name}" Margin="0,5,0,0"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Margin="20 0 20 30" Grid.Row="3">
+            <TextBlock x:Name="listViewers" Text="{DynamicResource m_listViewers}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" FontWeight="Bold"/>
+            <ListView x:Name="listViewApps" ItemsSource="{Binding ApplicationList}" BorderThickness="0" SelectionChanged="listViewApps_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Image Source="{Binding Icon}" Margin="0 0 20 0"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>

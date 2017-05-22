@@ -1,0 +1,8 @@
+Ser.xml
+*.cache
+obj
+bin
+packages
+.vs
+*.user
+patch.diff

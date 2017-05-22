@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PDFFinder.BusinessLayer.Implementation.PdfManager">
+    <Position X="6.75" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgIQAAAAIAAAQAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLayer.Implementation\PdfManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Analizer" />
+      <Property Name="Logger" />
+      <Property Name="Parser" />
+      <Property Name="Printer" />
+      <Property Name="Viewer" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="PDFFinder.BusinessLayer.Contracts.IPdfAnalizer" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLayer.Contracts\IPdfAnalizer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PDFFinder.BusinessLayer.Contracts.IPdfLogger" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLayer.Contracts\IPdfLogger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PDFFinder.BusinessLayer.Contracts.IPdfParser" Collapsed="true">
+    <Position X="10.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLayer.Contracts\IPdfParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PDFFinder.BusinessLayer.Contracts.IPdfPrinter" Collapsed="true">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>BusinessLayer.Contracts\IPdfPrinter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PDFFinder.BusinessLayer.Contracts.IPdfViewer" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLayer.Contracts\IPdfViewer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
