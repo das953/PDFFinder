@@ -27,8 +27,10 @@ namespace PDFFinder.BusinessLayer.Implementation
             PdfDocument doc = new PdfDocument();
             doc.LoadFromFile(fileName);
             PrintDialog dialogPrint = new PrintDialog();
-            dialogPrint.PrintQueue = new PrintQueue(new PrintServer(), "Отправить в OneNote 16");
+            dialogPrint.PrintQueue = new PrintQueue(new PrintServer(), printerSettings.printer_name);
             dialogPrint.PrintTicket = GetPrintTicketFromPrinter(printerSettings);
+
+            //тут трабла - навіть якщо правильно вибраний принтер - не завантажує налаштування
 
             if (dialogPrint.ShowDialog() == true)
             {

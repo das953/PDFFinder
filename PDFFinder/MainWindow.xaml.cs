@@ -45,9 +45,9 @@ namespace PDFFinder
             
             App.Language = PDFFinder.Properties.Settings.Default.DefaultLanguage;
             InitializeComponent();
-            MessageBox.Show($"{DefaultApplication.Path}");
+            
 
-            //Process.Start(DefaultApplication.Path, );
+            
 
         }
 

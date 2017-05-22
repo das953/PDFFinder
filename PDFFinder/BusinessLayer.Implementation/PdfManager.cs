@@ -74,7 +74,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 else
                 {
                     Viewer.View(fileName, processName);
-                    Logger.LogOpenForView(null);
+                    Logger.LogOpenForView();
                 }
             }
         }

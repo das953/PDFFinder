@@ -102,10 +102,7 @@ namespace PDFFinder
         void App_Startup(object sender, StartupEventArgs e)
         {
 
-
-            PdfManager man = new PdfManager();
-            string tmp = @"C:\Users\das953\Desktop\6f76b8df9d0716da74bb4ae6a900d483_1494864914.pdf";
-            man.Execute(tmp);
+           
 
             if (e.Args.Length > 1)
             {
@@ -115,8 +112,12 @@ namespace PDFFinder
             }
             if(e.Args.Length==1)
             {
+
+                PdfManager manager = new PdfManager();
+                manager.Execute(e.Args[0]);
+
                 //                PdfLogger logger = new PdfLogger();
-             //   PdfViewer pdfViewer = new PdfViewer();
+                //   PdfViewer pdfViewer = new PdfViewer();
                 //PdfManager man = new PdfManager();
                 //string tmp = @"C:\Users\das953\Desktop\6f76b8df9d0716da74bb4ae6a900d483_1494864914.pdf";
                 //man.Execute(tmp);
@@ -125,8 +126,11 @@ namespace PDFFinder
             }
             else
             {
-                MainWindow config = new MainWindow();
-                config.Show();
+                PdfManager manager = new PdfManager();
+                manager.Execute(@"C:\Users\das953\Desktop\Test.pdf");
+
+                //MainWindow config = new MainWindow();
+                //config.Show();
             }
         }
     }

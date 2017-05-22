@@ -6,6 +6,6 @@
     public interface IPdfLogger
     {
         void LogOpenForPrinting(string GroupName);
-        void LogOpenForView(string GroupName);
+        void LogOpenForView();
     }
 }

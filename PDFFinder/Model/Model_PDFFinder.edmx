@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PdfDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PdfDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Group_Template">
           <Key>
             <PropertyRef Name="group_name" />
           </Key>
           <Property Name="group_name" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="printer_name" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="printer_name" Type="nvarchar" MaxLength="30" />
           <Property Name="duplex" Type="bit" />
           <Property Name="paper_format" Type="nvarchar" MaxLength="2" />
         </EntityType>
@@ -19,7 +19,7 @@
             <PropertyRef Name="report_name" />
           </Key>
           <Property Name="report_name" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="printer_name" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="printer_name" Type="nvarchar" MaxLength="30" />
           <Property Name="duplex" Type="bit" />
           <Property Name="paper_format" Type="nvarchar" MaxLength="2" />
         </EntityType>
@@ -35,8 +35,7 @@
           <EntitySet Name="Report_Template" EntityType="Self.Report_Template" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statistica" EntityType="Self.Statistica" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PdfDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -45,7 +44,7 @@
             <PropertyRef Name="group_name" />
           </Key>
           <Property Name="group_name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="printer_name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="printer_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="duplex" Type="Boolean" />
           <Property Name="paper_format" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -54,7 +53,7 @@
             <PropertyRef Name="report_name" />
           </Key>
           <Property Name="report_name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="printer_name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="printer_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="duplex" Type="Boolean" />
           <Property Name="paper_format" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
         </EntityType>

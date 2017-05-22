@@ -23,14 +23,27 @@ namespace PDFFinder.BusinessLayer.Implementation
             if(group==null)
                 return null;
             List<Report_Template> reports = context.Report_Template.Where(x => x.report_name.Contains(group.group_name)).ToList();
+            string printerName, paperFormat;
+            bool? reportDuplex;
+            if (reports.Count != 0)
+            {
+                Report_Template defaultReport = reports.First();
 
-            Report_Template defaultReport = reports.First();
+               printerName = reports.All(x => x.printer_name == defaultReport.printer_name) ? defaultReport.printer_name : group.printer_name;
 
-            string printerName = reports.All(x => x.printer_name == defaultReport.printer_name) ? defaultReport.printer_name : group.printer_name;
+                reportDuplex = reports.All(x => x.duplex == defaultReport.duplex) ? defaultReport.duplex : group.duplex;
+
+               paperFormat = reports.All(x => x.paper_format == defaultReport.paper_format) ? defaultReport.paper_format : group.paper_format;
+            }
+            else
+            {
+                printerName = group.printer_name;
+
+                reportDuplex = group.duplex;
+
+                paperFormat = group.paper_format;
+            }
             
-            bool? reportDuplex = reports.All(x => x.duplex == defaultReport.duplex) ? defaultReport.duplex : group.duplex;
-            
-            string paperFormat = reports.All(x => x.paper_format == defaultReport.paper_format) ? defaultReport.paper_format : group.paper_format;
             Report_Template printerSettings = new Report_Template()
             {
                 report_name = metaData,
