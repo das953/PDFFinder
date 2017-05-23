@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -101,21 +103,25 @@ namespace PDFFinder
         
         void App_Startup(object sender, StartupEventArgs e)
         {
-
-           
-
-            if (e.Args.Length > 1)
+            if (e.Args.Length >= 1)
             {
-                MessageBox.Show("Invalid parameters. The only parameter must be a file path", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                App.Current.Shutdown();
-                return;
-            }
-            if(e.Args.Length==1)
-            {
-
-                PdfManager manager = new PdfManager();
-                manager.Execute(e.Args[0]);
-
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in e.Args)
+                {
+                    sb.Append(item);
+                }
+                string filename = sb.ToString();
+                FileInfo fileInfo = new FileInfo(filename);
+                if (fileInfo.Exists && fileInfo.Extension == ".pdf")
+                {
+                    IPdfManager pdfManager = new PdfManager();
+                    pdfManager.Execute(filename);
+                }
+                else
+                {
+                    MessageBox.Show("File not exists or has invalid extension", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                Application.Current.Shutdown();
             }
             else
             {

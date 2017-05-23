@@ -61,7 +61,7 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
             string title = Parser.Parse(fileName);
             FileAssociationManager associationManager = new FileAssociationManager();
-            //Временная заглушка (названия процесса)
+
             string processName = associationManager.GetAssociatedApplication(".pdf").Path;
             using (var context = new Model_PDFFinder())
             {
@@ -99,7 +99,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 {
                     Viewer.View(fileName, processName);
                     Logger.LogOpenForView();
-                }
+                }*/
             }
         }
     }
