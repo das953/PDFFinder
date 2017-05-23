@@ -126,7 +126,7 @@ namespace PDFFinder
             else
             {
                 //PdfManager manager = new PdfManager();
-                //manager.Execute(@"C:\Users\das953\Desktop\Test2.pdf");
+                //manager.Execute(@"C:\Users\das953\Desktop\Test.pdf");
                 //для тесту
 
                 MainWindow config = new MainWindow();

@@ -99,7 +99,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 {
                     Viewer.View(fileName, processName);
                     Logger.LogOpenForView();
-                }*/
+                }
             }
         }
     }
