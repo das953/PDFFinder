@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\igor7\Projects\PDFFinder\PDFFinder\obj\Debug\
+C:\Users\student\Projects\PDFFinder\PDFFinder\obj\Debug\
 PDFFinder
 none
 false
 DEBUG;TRACE
-C:\Users\igor7\Projects\PDFFinder\PDFFinder\App.xaml
-5-296986527
+C:\Users\student\Projects\PDFFinder\PDFFinder\App.xaml
+6-618842967
 2-1679638399
-26-403599
-25-11030052
-BusinessLayer.Implementation\CustomPrintDialog.xaml;MainWindow.xaml;Resources\lang.uk-UA.xaml;Resources\lang.ru-RU.xaml;Resources\lang.xaml;
+2761396592
+25-1637333287
+BusinessLayer.Implementation\CustomPrintDialog.xaml;BusinessLayer.Implementation\PageSettings.xaml;MainWindow.xaml;Resources\lang.uk-UA.xaml;Resources\lang.ru-RU.xaml;Resources\lang.xaml;
 
 False
 

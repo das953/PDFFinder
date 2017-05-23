@@ -89,6 +89,9 @@
     <Compile Include="BusinessLayer.Implementation\CustomPrintDialog.xaml.cs">
       <DependentUpon>CustomPrintDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLayer.Implementation\PageSettings.xaml.cs">
+      <DependentUpon>PageSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusinessLayer.Implementation\PdfAnalizer.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfLogger.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfManager.cs" />
@@ -111,6 +114,10 @@
       <DependentUpon>Model_PDFFinder.tt</DependentUpon>
     </Compile>
     <Page Include="BusinessLayer.Implementation\CustomPrintDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BusinessLayer.Implementation\PageSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

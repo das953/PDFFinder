@@ -1,11 +1,11 @@
-﻿<Window x:Class="PDFFinder.BusinessLayer.Implementation.CustomPrintDialog"
+﻿<Window x:Class="PDFFinder.BusinessLayer.Implementation.PageSettings"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFFinder.BusinessLayer.Implementation"
         mc:Ignorable="d"
-        Title="CustomPrintDialog" Height="300" Width="398.253">
+        Title="PageSettings" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -16,10 +16,9 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Label x:Name="label" Content="Available Printers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="printersList" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="230"/>
+            <Label x:Name="label" Content="Page Size" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="pageSizeList" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="pageSizeList_SelectionChanged"/>
         </StackPanel>
-        <Button x:Name="btnSettings" Grid.Column="1" Content="Settings" HorizontalAlignment="Left" Margin="40,37,0,0" Width="75" Height="20" VerticalAlignment="Top" Click="btnSettings_Click"/>
         <StackPanel Grid.Row="1" Margin="10,20,0,0">
             <Label>Print Range</Label>
             <Grid>

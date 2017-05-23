@@ -70,7 +70,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 //Test printer settings
                 Printer.Print(fileName, new Report_Template {
                     report_name = "",
-                    printer_name = "Microsoft Print to PDF",
+                    printer_name = "Fax",
                     duplex = true,
                     paper_format = "A5"
                 });

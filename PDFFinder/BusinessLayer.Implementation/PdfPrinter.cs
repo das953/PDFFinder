@@ -31,12 +31,15 @@ namespace PDFFinder.BusinessLayer.Implementation
             pageSizes = new Dictionary<string, PageMediaSizeName>{
                 { "A4", PageMediaSizeName.ISOA4 },
                 { "A3", PageMediaSizeName.ISOA3 },
-                { "A5", PageMediaSizeName.ISOA5 }
+                { "A5", PageMediaSizeName.ISOA5 },
+                { "B4", PageMediaSizeName.JISB4 }
             };
         }
         public void Print(string fileName, Report_Template printerSettings)
         {
-            PdfDocument doc = new PdfDocument();
+            CustomPrintDialog printDialog = new CustomPrintDialog(printerSettings);
+            printDialog.ShowDialog();
+            /*PdfDocument doc = new PdfDocument();
             doc.LoadFromFile(fileName);
 
             PrintDialog dialogPrint = new PrintDialog();
@@ -60,11 +63,13 @@ namespace PDFFinder.BusinessLayer.Implementation
 
                 if (printQueue != null)
                 {
-                    dialogPrint.PrintQueue = new PrintQueue(localPrintServer, printQueue.Name, PrintSystemDesiredAccess.AdministratePrinter);
+                    //dialogPrint.PrintQueue = new PrintQueue(localPrintServer, printQueue.Name, PrintSystemDesiredAccess.AdministratePrinter);
+                    dialogPrint.PrintQueue = new PrintQueue(localPrintServer, printQueue.Name);
                 }
                 else
                 {
-                    dialogPrint.PrintQueue = new PrintQueue(localPrintServer, localPrintServer.DefaultPrintQueue.Name, PrintSystemDesiredAccess.AdministratePrinter);
+                    //dialogPrint.PrintQueue = new PrintQueue(localPrintServer, localPrintServer.DefaultPrintQueue.Name, PrintSystemDesiredAccess.AdministratePrinter);
+                    dialogPrint.PrintQueue = new PrintQueue(localPrintServer, localPrintServer.DefaultPrintQueue.Name);
                 }
 
                 //Setting printer and pages
@@ -76,7 +81,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 dialogPrint.PrintQueue.UserPrintTicket = result.ValidatedPrintTicket;
                 dialogPrint.PrintQueue.DefaultPrintTicket = result.ValidatedPrintTicket;
                 dialogPrint.PrintTicket = result.ValidatedPrintTicket;
-                dialogPrint.PrintQueue.Commit();
+                //dialogPrint.PrintQueue.Commit();
             }
 
             PrintDocument printDoc = doc.PrintDocument;
@@ -90,7 +95,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 printDoc.PrinterSettings.Duplex = dialogPrint.PrintTicket.Duplexing == Duplexing.TwoSidedShortEdge ? Duplex.Vertical : Duplex.Simplex;
 
                 //Page size
-                PageMediaSize pageSize = dialogPrint.PrintTicket.PageMediaSize;
+                PageMediaSize pageSize = dialogPrint.PrintQueue.UserPrintTicket.PageMediaSize;
                 string name = (from p in pageSizes where p.Value == pageSize.PageMediaSizeName select p.Key).FirstOrDefault();
                 if(name!=null)
                 {
@@ -105,7 +110,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 {
                     MessageBox.Show(ex.Message, "Print Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
+            }*/
         }
 
 
@@ -113,7 +118,6 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
 
             PrintTicket printTicket = printQueue.DefaultPrintTicket;
-            PageMediaSize mediaSize = new PageMediaSize(pageSizes[printerSettings.paper_format]);
 
             PrintCapabilities printCapabilites = printQueue.GetPrintCapabilities();
 
@@ -124,8 +128,7 @@ namespace PDFFinder.BusinessLayer.Implementation
             }
             if (printerSettings.duplex == true)
             {
-                if (printCapabilites.DuplexingCapability.Contains(
-                    Duplexing.TwoSidedShortEdge))
+                if (printCapabilites.DuplexingCapability.Contains(Duplexing.TwoSidedShortEdge))
                 {
                     printTicket.Duplexing = Duplexing.TwoSidedShortEdge;
                 }
@@ -142,7 +145,9 @@ namespace PDFFinder.BusinessLayer.Implementation
             {
                 printTicket.Stapling = Stapling.StapleDualLeft;
             }
-            PageMediaSize pageSize = printCapabilites.PageMediaSizeCapability.Where(p => p.PageMediaSizeName == pageSizes[printerSettings.paper_format]).FirstOrDefault();
+            PageMediaSize pageSize = null;
+            if (pageSizes.ContainsKey(printerSettings.paper_format))
+                pageSize = printCapabilites.PageMediaSizeCapability.Where(p => p.PageMediaSizeName == pageSizes[printerSettings.paper_format]).FirstOrDefault();
             if (pageSize != null)
                 printTicket.PageMediaSize = pageSize;
             printTicket.PageOrientation = PageOrientation.Portrait;
