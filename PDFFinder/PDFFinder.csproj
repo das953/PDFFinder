@@ -60,6 +60,7 @@
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -85,6 +86,9 @@
     <Compile Include="BusinessLayer.Contracts\IPdfPrinter.cs" />
     <Compile Include="BusinessLayer.Contracts\IPdfViewer.cs" />
     <Compile Include="BusinessLayer.Implementation\AppDescription.cs" />
+    <Compile Include="BusinessLayer.Implementation\CustomPrintDialog.xaml.cs">
+      <DependentUpon>CustomPrintDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusinessLayer.Implementation\PdfAnalizer.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfLogger.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfManager.cs" />
@@ -106,6 +110,10 @@
     <Compile Include="Model\Statistica.cs">
       <DependentUpon>Model_PDFFinder.tt</DependentUpon>
     </Compile>
+    <Page Include="BusinessLayer.Implementation\CustomPrintDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

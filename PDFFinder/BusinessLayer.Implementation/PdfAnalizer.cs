@@ -23,8 +23,10 @@ namespace PDFFinder.BusinessLayer.Implementation
             if(group==null)
                 return null;
             List<Report_Template> reports = context.Report_Template.Where(x => x.report_name.Contains(group.group_name)).ToList();
+
             string printerName, paperFormat;
             bool? reportDuplex;
+
             if (reports.Count != 0)
             {
                 Report_Template defaultReport = reports.First();

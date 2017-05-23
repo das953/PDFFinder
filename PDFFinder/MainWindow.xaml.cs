@@ -45,10 +45,6 @@ namespace PDFFinder
             
             App.Language = PDFFinder.Properties.Settings.Default.DefaultLanguage;
             InitializeComponent();
-            
-
-            
-
         }
 
         

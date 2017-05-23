@@ -61,12 +61,22 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
             string title = Parser.Parse(fileName);
             FileAssociationManager associationManager = new FileAssociationManager();
-            //Временная заглушка (названия процесса)
+
             string processName = associationManager.GetAssociatedApplication(".pdf").Path;
             using (var context = new Model_PDFFinder())
             {
                 Report_Template printerSettings = Analizer.GetPrinterSettings(title, context);
-                if (printerSettings != null)
+
+                //Test printer settings
+                Printer.Print(fileName, new Report_Template {
+                    report_name = "",
+                    printer_name = "Microsoft Print to PDF",
+                    duplex = true,
+                    paper_format = "A5"
+                });
+
+                //Temporary commented (this is main code)
+                /*if (printerSettings != null)
                 {
                     Printer.Print(fileName, printerSettings);
                     Logger.LogOpenForPrinting(title);
@@ -75,7 +85,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                 {
                     Viewer.View(fileName, processName);
                     Logger.LogOpenForView();
-                }
+                }*/
             }
         }
     }
