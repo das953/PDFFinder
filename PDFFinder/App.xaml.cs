@@ -116,21 +116,15 @@ namespace PDFFinder
                 PdfManager manager = new PdfManager();
                 manager.Execute(e.Args[0]);
 
-                //                PdfLogger logger = new PdfLogger();
-                //   PdfViewer pdfViewer = new PdfViewer();
-                //PdfManager man = new PdfManager();
-                //string tmp = @"C:\Users\das953\Desktop\6f76b8df9d0716da74bb4ae6a900d483_1494864914.pdf";
-                //man.Execute(tmp);
-                // man.Execute(e.Args[0]);
-                //   pdfViewer.View(null, e.Args[0]);
             }
             else
             {
-                PdfManager manager = new PdfManager();
-                manager.Execute(@"C:\Users\das953\Desktop\Test.pdf");
+                //PdfManager manager = new PdfManager();
+                //manager.Execute(@"C:\Users\das953\Desktop\Test2.pdf");
+                //для тесту
 
-                //MainWindow config = new MainWindow();
-                //config.Show();
+                MainWindow config = new MainWindow();
+                config.Show();
             }
         }
     }

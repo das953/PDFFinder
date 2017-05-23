@@ -66,10 +66,34 @@ namespace PDFFinder.BusinessLayer.Implementation
             using (var context = new Model_PDFFinder())
             {
                 Report_Template printerSettings = Analizer.GetPrinterSettings(title, context);
-                if (printerSettings != null)
+
+                if (printerSettings != null || title != string.Empty)
                 {
-                    Printer.Print(fileName, printerSettings);
+                    var NewGroup = new Group_Template
+                    {
+                        duplex = false,
+                        paper_format = "A4",
+                        group_name = title.Substring(0, 5),
+                        printer_name = System.Drawing.Printing.PrinterSettings.InstalledPrinters[0]
+                    };
+
+
+                    if (printerSettings == null)
+                    {
+                        context.Group_Template.Add(NewGroup);
+                        context.SaveChanges();
+                    }
+                        
+                 
+                    Printer.Print(fileName, printerSettings != null ? printerSettings : new Report_Template
+                    {
+                     duplex = NewGroup.duplex,
+                     paper_format = NewGroup.paper_format,
+                     printer_name = NewGroup.printer_name,
+                     report_name = title
+                    });
                     Logger.LogOpenForPrinting(title);
+                    App.Current.Shutdown();
                 }
                 else
                 {

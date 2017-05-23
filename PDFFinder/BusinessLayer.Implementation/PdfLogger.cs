@@ -18,8 +18,17 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
 
             var dbcontext = new Model_PDFFinder();
-            dbcontext.Statisticas.Where(x => x.group_name == title.Substring(0,5)).First().processed_files_count++;
-
+            var temp = dbcontext.Statisticas.Where(x => x.group_name == title.Substring(0, 5));
+            if(temp.Count() == 0)
+            {
+                dbcontext.Statisticas.Add(new Statistica {
+                    group_name = title.Substring(0, 5),
+                    processed_files_count =1});
+            }
+            else
+            {
+                temp.First().processed_files_count++;
+            }  
             dbcontext.SaveChanges();
 
         }
