@@ -81,5 +81,10 @@ namespace PDFFinder
             CultureInfo ci = new CultureInfo("ru-RU");
             App.Language = ci;
         }
+
+        private void btn_Stat_Click(object sender, RoutedEventArgs e)
+        {
+            PdfStatisticsView.ShowStatistics();
+        }
     }
 }
