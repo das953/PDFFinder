@@ -24,134 +24,26 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public class PdfPrinter : IPdfPrinter
     {
-        Dictionary<string, PageMediaSizeName> pageSizes;
-        public PdfPrinter()
-        {
-            //Dictionary for paper formats
-            pageSizes = new Dictionary<string, PageMediaSizeName>{
-                { "A4", PageMediaSizeName.ISOA4 },
-                { "A3", PageMediaSizeName.ISOA3 },
-                { "A5", PageMediaSizeName.ISOA5 },
-                { "B4", PageMediaSizeName.JISB4 }
-            };
-        }
         public void Print(string fileName, Report_Template printerSettings)
         {
-            CustomPrintDialog printDialog = new CustomPrintDialog(printerSettings);
-            printDialog.ShowDialog();
-            /*PdfDocument doc = new PdfDocument();
+            PdfDocument doc = new PdfDocument();
             doc.LoadFromFile(fileName);
 
-            PrintDialog dialogPrint = new PrintDialog();
-
-            //If printerSettings==null -> open default PrintDialog
-            if (printerSettings!=null)
+            CustomPrintDialog printDialog = new CustomPrintDialog(printerSettings);
+            printDialog.MinPage = 1;
+            printDialog.MaxPage = doc.Pages.Count;
+            if(printDialog.ShowDialog() == true)
             {
-                LocalPrintServer localPrintServer = new LocalPrintServer();
-
-                //Get all printers
-                PrintQueueCollection localPrinterCollection = localPrintServer.GetPrintQueues();
-
-                if (localPrinterCollection.Count() == 0)
-                {
-                    MessageBox.Show("No available printers", "Printing error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                //Get printer from printerSettings (stored in database)
-                PrintQueue printQueue = (from printer in localPrinterCollection where printer.Name == printerSettings.printer_name select printer).FirstOrDefault();
-
-                if (printQueue != null)
-                {
-                    //dialogPrint.PrintQueue = new PrintQueue(localPrintServer, printQueue.Name, PrintSystemDesiredAccess.AdministratePrinter);
-                    dialogPrint.PrintQueue = new PrintQueue(localPrintServer, printQueue.Name);
-                }
-                else
-                {
-                    //dialogPrint.PrintQueue = new PrintQueue(localPrintServer, localPrintServer.DefaultPrintQueue.Name, PrintSystemDesiredAccess.AdministratePrinter);
-                    dialogPrint.PrintQueue = new PrintQueue(localPrintServer, localPrintServer.DefaultPrintQueue.Name);
-                }
-
-                //Setting printer and pages
-                PrintTicket deltaPrintTicket = GetPrintTicketFromPrinter(dialogPrint.PrintQueue, printerSettings);
-
-                var result = dialogPrint.PrintQueue.MergeAndValidatePrintTicket(dialogPrint.PrintQueue.UserPrintTicket,
-                    deltaPrintTicket);
-                
-                dialogPrint.PrintQueue.UserPrintTicket = result.ValidatedPrintTicket;
-                dialogPrint.PrintQueue.DefaultPrintTicket = result.ValidatedPrintTicket;
-                dialogPrint.PrintTicket = result.ValidatedPrintTicket;
-                //dialogPrint.PrintQueue.Commit();
+                doc.PrintFromPage = printDialog.MinPage < 1 ? 1 : printDialog.MinPage;
+                doc.PrintToPage = printDialog.MaxPage > doc.Pages.Count ? doc.Pages.Count : printDialog.MaxPage;
+                //Set the name of the printer which is to print the PDF
+                doc.PrinterName = printDialog.DefaultPrinter;
+                doc.PageSettings.Orientation = printDialog.CurrentPrinterSettings.DefaultPageSettings.Landscape == true ? PdfPageOrientation.Landscape : PdfPageOrientation.Portrait;
+                doc.PageSettings.Size = new System.Drawing.SizeF(printDialog.CurrentPrinterSettings.DefaultPageSettings.PaperSize.Width, printDialog.CurrentPrinterSettings.DefaultPageSettings.PaperSize.Height);
+                PrintDocument printDoc = doc.PrintDocument;
+                printDoc.PrinterSettings.Duplex = printDialog.Duplex == true ? Duplex.Vertical : Duplex.Simplex;
+                printDoc.Print();
             }
-
-            PrintDocument printDoc = doc.PrintDocument;
-            
-            if (dialogPrint.ShowDialog() == true)
-            {
-                //Printer
-                printDoc.PrinterSettings.PrinterName = dialogPrint.PrintQueue.Name;
-
-                //Duplexing
-                printDoc.PrinterSettings.Duplex = dialogPrint.PrintTicket.Duplexing == Duplexing.TwoSidedShortEdge ? Duplex.Vertical : Duplex.Simplex;
-
-                //Page size
-                PageMediaSize pageSize = dialogPrint.PrintQueue.UserPrintTicket.PageMediaSize;
-                string name = (from p in pageSizes where p.Value == pageSize.PageMediaSizeName select p.Key).FirstOrDefault();
-                if(name!=null)
-                {
-                    printDoc.DefaultPageSettings.PaperSize = new PaperSize(name, (int)pageSize.Width, (int)pageSize.Height);
-                }
-                 
-                try
-                {
-                    printDoc.Print();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Print Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }*/
-        }
-
-
-        private PrintTicket GetPrintTicketFromPrinter(PrintQueue printQueue, Report_Template printerSettings)
-        {
-
-            PrintTicket printTicket = printQueue.DefaultPrintTicket;
-
-            PrintCapabilities printCapabilites = printQueue.GetPrintCapabilities();
-
-            // Modify PrintTicket
-            if (printCapabilites.CollationCapability.Contains(Collation.Collated))
-            {
-                printTicket.Collation = Collation.Collated;
-            }
-            if (printerSettings.duplex == true)
-            {
-                if (printCapabilites.DuplexingCapability.Contains(Duplexing.TwoSidedShortEdge))
-                {
-                    printTicket.Duplexing = Duplexing.TwoSidedShortEdge;
-                }
-            }
-            else
-            {
-                if (printCapabilites.DuplexingCapability.Contains(
-                    Duplexing.OneSided))
-                {
-                    printTicket.Duplexing = Duplexing.OneSided;
-                }
-            }
-            if (printCapabilites.StaplingCapability.Contains(Stapling.StapleDualLeft))
-            {
-                printTicket.Stapling = Stapling.StapleDualLeft;
-            }
-            PageMediaSize pageSize = null;
-            if (pageSizes.ContainsKey(printerSettings.paper_format))
-                pageSize = printCapabilites.PageMediaSizeCapability.Where(p => p.PageMediaSizeName == pageSizes[printerSettings.paper_format]).FirstOrDefault();
-            if (pageSize != null)
-                printTicket.PageMediaSize = pageSize;
-            printTicket.PageOrientation = PageOrientation.Portrait;
-            return printTicket;
-        }
+        }   
     }
 }

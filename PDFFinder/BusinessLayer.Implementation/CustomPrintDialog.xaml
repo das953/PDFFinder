@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFFinder.BusinessLayer.Implementation"
         mc:Ignorable="d"
-        Title="CustomPrintDialog" Height="300" Width="398.253">
+        Title="Print Dialog" Height="300" Width="420" DataContext = "{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:InverseBooleanConverter x:Key="inverseBooleanConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -17,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Label x:Name="label" Content="Available Printers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="printersList" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="230"/>
+            <ComboBox x:Name="printersList" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="230" ItemsSource="{Binding AvailablePrinters}" SelectedItem="{Binding DefaultPrinter, Mode=TwoWay}" SelectionChanged="printersList_SelectionChanged"/>
         </StackPanel>
         <Button x:Name="btnSettings" Grid.Column="1" Content="Settings" HorizontalAlignment="Left" Margin="40,37,0,0" Width="75" Height="20" VerticalAlignment="Top" Click="btnSettings_Click"/>
         <StackPanel Grid.Row="1" Margin="10,20,0,0">
@@ -30,17 +33,29 @@
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <RadioButton Content="All" Margin="5"/>
-                <RadioButton Grid.Row="1" Content="Pages" Margin="5"/>
+                <RadioButton x:Name="rbtnAllPages" Content="All" Margin="5" Checked="rbtnAllPages_Checked"/>
+                <RadioButton x:Name="rbtnSomePages" Grid.Row="1" Content="Pages" Margin="5" Checked="rbtnSomePages_Checked"/>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="1" Margin="20,0,0,0">
                     <Label>from:</Label>
-                    <TextBox Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="txtMinPage" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewTextInput="txt_PreviewTextInput" Text="{Binding MinPage, Mode=TwoWay}"/>
                     <Label>to:</Label>
-                    <TextBox Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="txtMaxPage" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewTextInput="txt_PreviewTextInput" Text="{Binding MaxPage, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="30,50,0,0">
+                    <Button x:Name="btnPrint" Content="Print" Width="70" Height="20" VerticalAlignment="Top" Click="btnPrint_Click"/>
+                    <Button x:Name="btnCancel" Content="Cancel" Width="70" Margin="20,0,0,0" IsCancel="True"/>
                 </StackPanel>
             </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="40,20,0,0">
+            <Label Content="Duplexing" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <StackPanel x:Name="stckDuplex" IsEnabled="{Binding CanDuplex}">
+                <RadioButton x:Name="rbtnSimplex" Margin="5" Content="Simplex" IsChecked="{Binding Duplex, Converter={StaticResource inverseBooleanConverter}, Mode=TwoWay}"/>
+                <RadioButton x:Name="rbtnDuplex" Margin="5" Content="Duplex" IsChecked="{Binding Duplex, Mode=TwoWay}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

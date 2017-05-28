@@ -89,6 +89,7 @@
     <Compile Include="BusinessLayer.Implementation\CustomPrintDialog.xaml.cs">
       <DependentUpon>CustomPrintDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLayer.Implementation\InverseBooleanConverter.cs" />
     <Compile Include="BusinessLayer.Implementation\PageSettings.xaml.cs">
       <DependentUpon>PageSettings.xaml</DependentUpon>
     </Compile>
@@ -98,6 +99,7 @@
     <Compile Include="BusinessLayer.Implementation\PdfParser.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfPrinter.cs" />
     <Compile Include="BusinessLayer.Implementation\PdfViewer.cs" />
+    <Compile Include="BusinessLayer.Implementation\WFPdfPrinter.cs" />
     <Compile Include="FileAssociationManager.cs" />
     <Compile Include="Model\Group_Template.cs">
       <DependentUpon>Model_PDFFinder.tt</DependentUpon>

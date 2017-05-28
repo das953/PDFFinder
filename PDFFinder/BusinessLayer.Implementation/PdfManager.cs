@@ -8,49 +8,64 @@ using System.Threading.Tasks;
 namespace PDFFinder.BusinessLayer.Implementation
 {
     using Model;
-
+    using System.Windows;
     /// <summary>
     /// Основной класс для обработки PDF файла, включая считывание метаданных (Parser), анализ файла (Analizer), печать файла (Printer), просмотр файла (Viewer) и запись информации об открытии или печати в базу данных (Logger). Функция Execute (string fileName) - принимает имя файла, занимается выполнением вышеперечисленных операций.
     /// </summary>
     public class PdfManager : IPdfManager
     {
+        private IPdfAnalizer _analizer;
         public IPdfAnalizer Analizer
         {
             get
             {
-                return new PdfAnalizer();
+                if (_analizer == null)
+                    _analizer = new PdfAnalizer();
+                return _analizer;
             }
         }
 
+        private IPdfLogger _logger;
         public IPdfLogger Logger
         {
             get
             {
-                return new PdfLogger();
+                if (_logger == null)
+                    _logger = new PdfLogger();
+                return _logger;
             }
         }
 
+        private IPdfParser _parser;
         public IPdfParser Parser
         {
             get
             {
-                return new PdfParser();
+                if (_parser == null)
+                    _parser = new PdfParser();
+                return _parser;
             }
         }
 
+        private IPdfPrinter _printer;
         public IPdfPrinter Printer
         {
             get
             {
-                return new PdfPrinter();
+                if (_printer == null)
+                    _printer = new WFPdfPrinter();
+                return _printer;
             }
         }
 
+        private IPdfViewer _viewer;
         public IPdfViewer Viewer
         {
             get
             {
-                return new PdfViewer();
+                if (_viewer == null)
+                    _viewer = new PdfViewer();
+                return _viewer;
             }
         }
         /// <summary>
@@ -66,26 +81,24 @@ namespace PDFFinder.BusinessLayer.Implementation
             using (var context = new Model_PDFFinder())
             {
                 Report_Template printerSettings = Analizer.GetPrinterSettings(title, context);
-
-                //Test printer settings
-                Printer.Print(fileName, new Report_Template {
-                    report_name = "",
-                    printer_name = "Fax",
-                    duplex = true,
-                    paper_format = "A5"
-                });
-
-                //Temporary commented (this is main code)
-                /*if (printerSettings != null)
+                
+                if (printerSettings != null)
                 {
-                    Printer.Print(fileName, printerSettings);
+                    try
+                    {
+                        Printer.Print(fileName, printerSettings);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                     Logger.LogOpenForPrinting(title);
                 }
                 else
                 {
                     Viewer.View(fileName, processName);
                     Logger.LogOpenForView();
-                }*/
+                }
             }
         }
     }
