@@ -14,7 +14,6 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public class PdfStatisticsView
     {
-        //TODO file must be unvisible and remove at shutdown programm
 
         /// <summary>
         /// write html document into file and open it in browser
@@ -23,24 +22,22 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
 
             var html = CreateHtml();
-            using (FileStream fs = new FileStream($@"{Directory.GetCurrentDirectory()}\temp.html", FileMode.Create))
+            var filePath = $@"{Directory.GetCurrentDirectory()}\~TempStatistics.html";
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
             {
-
+                
                 StreamWriter sw = new StreamWriter(fs);
                 sw.Write(html);
                 sw.Close();
+                File.SetAttributes(filePath, FileAttributes.Hidden);
             }
 
 
 
-            System.Diagnostics.Process.Start($@"{Directory.GetCurrentDirectory()}\temp.html");
+            System.Diagnostics.Process.Start(filePath);
 
-            #region DANGER!
-
-            System.Threading.Thread.Sleep(1301);
-            File.Delete($@"{Directory.GetCurrentDirectory()}\temp.html");
-
-            #endregion
         }
 
         /// <summary>
@@ -51,6 +48,13 @@ namespace PDFFinder.BusinessLayer.Implementation
         /// </returns>
         XElement CreateHtml()
         {
+
+           // var path = Path.GetTempPath();
+           //var img =  Properties.Resources.MoonIcon.ToBitmap();
+         
+           // var filePath = System.Reflection.Assembly.GetExecutingAssembly().Location + "\\..\\..\\Resources\\MoonIcon.ico";
+
+           // System.Windows.MessageBox.Show(filePath);
             //variable for bootstrap script
             var src = new XElement("script",
 
@@ -64,6 +68,12 @@ namespace PDFFinder.BusinessLayer.Implementation
 
  //add head to html
  new XElement("head",
+
+  new XElement("title", "MoonPDF Statistic"),
+
+ //  new XElement("link",
+ //new XAttribute("rel", "shortcut icon"),
+ //new XAttribute("href", $"{(new System.Resources.ResourceManager("PDFFinder.Properties.Resources", typeof(PDFFinder.Properties.Resources).Assembly)).GetString("MoonIcon")}")),
 
  new XElement("link",
  new XAttribute("rel", "stylesheet"),
@@ -96,6 +106,7 @@ namespace PDFFinder.BusinessLayer.Implementation
 
             var DBcontext = new Model.Model_PDFFinder();
             var stat = DBcontext.Statisticas.ToList();
+
 
             //table with header
             var table =
@@ -135,24 +146,32 @@ new XElement("thead",
     );
 
             //add data to body
-            for (int i = 0; i < stat.Count; i++)
+            if (stat.Count > 0)
             {
+                table.Add(new XElement("tr",
+                     new XAttribute("style", "background: #7b97ea"),
+                    new XElement("td", $"{stat[0].group_name.Substring(1)}"),
+                    new XElement("td", $"{stat[0].processed_files_count}")));
 
-                if (i % 2 != 0)
+                for (int i = 1; i < stat.Count; i++)
                 {
-                    table.Add(new XElement("tr",
-                 new XAttribute("style", "background: #7b97ea"),
-                new XElement("td", $"{stat[i].group_name}"),
-                new XElement("td", $"{stat[i].processed_files_count}")));
-                }
-                else
-                {
-                    table.Add(new XElement("tr",
-                 new XAttribute("style", "background: #ffff99"),
-             new XElement("td", $"{stat[i].group_name}"),
-                new XElement("td", $"{stat[i].processed_files_count}")));
-                }
 
+                    if (i % 2 != 0)
+                    {
+                        table.Add(new XElement("tr",
+                     new XAttribute("style", "background: #ffff99"),
+                    new XElement("td", $"{stat[i].group_name}"),
+                    new XElement("td", $"{stat[i].processed_files_count}")));
+                    }
+                    else
+                    {
+                        table.Add(new XElement("tr",
+                     new XAttribute("style", "background: #7b97ea"),
+                 new XElement("td", $"{stat[i].group_name}"),
+                    new XElement("td", $"{stat[i].processed_files_count}")));
+                    }
+
+                }
             }
 
             return body;
