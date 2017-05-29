@@ -63,6 +63,16 @@ namespace PDFFinder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MoonBckg {
+            get {
+                object obj = ResourceManager.GetObject("MoonBckg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Russia_Flag {
             get {
                 object obj = ResourceManager.GetObject("Russia_Flag", resourceCulture);

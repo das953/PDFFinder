@@ -53,7 +53,7 @@ namespace PDFFinder.BusinessLayer.Implementation
             get
             {
                 if (_printer == null)
-                    _printer = new WFPdfPrinter();
+                    _printer = new PdfPrinter();
                 return _printer;
             }
         }
