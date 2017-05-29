@@ -49,13 +49,6 @@ namespace PDFFinder.BusinessLayer.Implementation
         XElement CreateHtml()
         {
 
-           // var path = Path.GetTempPath();
-           //var img =  Properties.Resources.MoonIcon.ToBitmap();
-         
-           // var filePath = System.Reflection.Assembly.GetExecutingAssembly().Location + "\\..\\..\\Resources\\MoonIcon.ico";
-
-           // System.Windows.MessageBox.Show(filePath);
-            //variable for bootstrap script
             var src = new XElement("script",
 
  new XAttribute("src", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"),
@@ -71,9 +64,6 @@ namespace PDFFinder.BusinessLayer.Implementation
 
   new XElement("title", "MoonPDF Statistic"),
 
- //  new XElement("link",
- //new XAttribute("rel", "shortcut icon"),
- //new XAttribute("href", $"{(new System.Resources.ResourceManager("PDFFinder.Properties.Resources", typeof(PDFFinder.Properties.Resources).Assembly)).GetString("MoonIcon")}")),
 
  new XElement("link",
  new XAttribute("rel", "stylesheet"),
