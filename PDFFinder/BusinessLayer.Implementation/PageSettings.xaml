@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFFinder.BusinessLayer.Implementation"
         mc:Ignorable="d"
-        Title="PageSettings" Height="300" Width="300">
+        Title="Page Settings" Height="250" Width="300" DataContext="{Binding RelativeSource={RelativeSource Self}}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:InverseBooleanConverter x:Key="inverseBooleanConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -17,29 +21,16 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Label x:Name="label" Content="Page Size" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="pageSizeList" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="pageSizeList_SelectionChanged"/>
+            <ComboBox x:Name="pageSizeList" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding AvailablePaperSizes}" SelectedItem="{Binding DefaultPaperSize}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="10,20,0,0">
-            <Label>Print Range</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <RadioButton Content="All" Margin="5"/>
-                <RadioButton Grid.Row="1" Content="Pages" Margin="5"/>
-
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="1" Margin="20,0,0,0">
-                    <Label>from:</Label>
-                    <TextBox Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
-                    <Label>to:</Label>
-                    <TextBox Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
-                </StackPanel>
-            </Grid>
+            <Label Content="Page orientation"/>
+            <RadioButton x:Name="rbtnPortrait" Content="Portrait" Margin="5" IsChecked="{Binding IsLandscape, Converter={StaticResource inverseBooleanConverter}}"/>
+            <RadioButton x:Name="rbtnLandscape" Grid.Row="1" Content="Landscape" Margin="5" IsChecked="{Binding IsLandscape}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="30,0,0,30">
+            <Button x:Name="btnApply" Content="Apply" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="btnApply_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Margin="20,0,0,0" Width="70" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>

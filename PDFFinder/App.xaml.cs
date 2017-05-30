@@ -115,7 +115,14 @@ namespace PDFFinder
                 if (fileInfo.Exists && fileInfo.Extension == ".pdf")
                 {
                     IPdfManager pdfManager = new PdfManager();
-                    pdfManager.Execute(filename);
+                    try
+                    {
+                        pdfManager.Execute(filename);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 else
                 {

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Drawing.Printing;
+using System.Collections.ObjectModel;
+using PDFFinder.Model;
 
 namespace PDFFinder.BusinessLayer.Implementation
 {
@@ -20,30 +22,44 @@ namespace PDFFinder.BusinessLayer.Implementation
     /// </summary>
     public partial class PageSettings : Window
     {
-        string _printerName = null;
-        public PageSettings(string printerName, string paperSize)
+        readonly PrinterSettings _printerSettings;
+        readonly Report_Template _customPrinterSettings;
+
+        //List of available page sizes
+        private ObservableCollection<string> _availablePaperSizes;
+        public ObservableCollection<string> AvailablePaperSizes
         {
-            InitializeComponent();
-            _printerName = printerName;
-            PrinterSettings settings = new PrinterSettings();
-            settings.PrinterName = printerName;
-            string defaultPaperSize = null;
-            foreach (PaperSize pageSize in settings.PaperSizes)
+            get
             {
-                string paperName = pageSize.PaperName;
-                pageSizeList.Items.Add(paperName);
-                if(paperSize == pageSize.PaperName)
+                if (_availablePaperSizes == null)
                 {
-                    defaultPaperSize = paperSize;
+                    _availablePaperSizes = new ObservableCollection<string>();
+                    foreach (PaperSize paperSize in _printerSettings.PaperSizes)
+                    {
+                        _availablePaperSizes.Add(paperSize.PaperName);
+                    }
                 }
+                return _availablePaperSizes;
             }
-            pageSizeList.SelectedItem = defaultPaperSize == null ? settings.DefaultPageSettings.PaperSize.PaperName : defaultPaperSize;
+            set { _availablePaperSizes = value; }
         }
 
-        private void pageSizeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public string DefaultPaperSize { get; set; }
+
+        public bool? IsLandscape { get; set; }
+
+        public PageSettings(PrinterSettings printerSettings, Report_Template customPrinterSettings)
         {
-            PrinterSettings settings = new PrinterSettings();
-            settings.PrinterName = _printerName;
+            _printerSettings = printerSettings;
+            _customPrinterSettings = customPrinterSettings;
+            DefaultPaperSize = printerSettings.DefaultPageSettings.PaperSize.PaperName;
+            IsLandscape = printerSettings.DefaultPageSettings.Landscape;
+            InitializeComponent();
+        }
+
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }
