@@ -7,7 +7,7 @@
       <Diagram DiagramId="92c9b9d07f234c7dbd82e2b55d1fabfe" Name="Diagram1">
         <EntityTypeShape EntityType="PdfDBModel.Group_Template" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PdfDBModel.Report_Template" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PdfDBModel.Statistica" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PdfDBModel.Statistica" Width="1.5" PointX="0.875" PointY="2.875" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

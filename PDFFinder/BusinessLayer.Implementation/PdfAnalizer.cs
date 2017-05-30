@@ -53,6 +53,11 @@ namespace PDFFinder.BusinessLayer.Implementation
                 duplex = reportDuplex,
                 paper_format = paperFormat
             };
+            if((from r in context.Report_Template where r.report_name == printerSettings.report_name select r).Count()==0)
+            {
+                context.Report_Template.Add(printerSettings);
+                context.SaveChanges();
+            }
             return printerSettings;
         }
     }

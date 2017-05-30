@@ -129,7 +129,7 @@ namespace PDFFinder.BusinessLayer.Implementation
         }
 
         //Current print settings
-        public PrinterSettings CurrentPrinterSettings { get { return _printerSettings[DefaultPrinter]; } }
+        public PrinterSettings CurrentPrinterSettings { get; set; }
 
         #endregion
 
@@ -148,6 +148,7 @@ namespace PDFFinder.BusinessLayer.Implementation
                     paperSize = (from item in _printerSettings[DefaultPrinter].PaperSizes.Cast<PaperSize>() where item.PaperName == "A4" select item).FirstOrDefault();
                 }
                 _printerSettings[DefaultPrinter].DefaultPageSettings.PaperSize = paperSize;
+                CurrentPrinterSettings = _printerSettings[DefaultPrinter];
                 Duplex = _customPrinterSettings.duplex;
                 MinPage = 1;
                 MaxPage = 1; 
@@ -176,7 +177,7 @@ namespace PDFFinder.BusinessLayer.Implementation
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            _pageSettingsDialog = new PageSettings(_printerSettings[DefaultPrinter], _customPrinterSettings);
+            _pageSettingsDialog = new PageSettings(CurrentPrinterSettings, _customPrinterSettings);
 
             //Providing page properties for _printerSettings
             if (_pageSettingsDialog.ShowDialog()==true)
