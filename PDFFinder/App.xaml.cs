@@ -140,5 +140,11 @@ namespace PDFFinder
                 config.Show();
             }
         }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            File.Delete($@"{Directory.GetCurrentDirectory()}\~TempStatistics.html");
+            base.OnExit(e);
+        }
     }
 }

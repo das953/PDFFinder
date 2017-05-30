@@ -36,7 +36,7 @@ namespace PDFFinder.BusinessLayer.Implementation
         {
             var dbcontext = new Model_PDFFinder();
 
-            dbcontext.Statisticas.Where(x => x.group_name == "NoGroup").First().processed_files_count++;
+            dbcontext.Statisticas.Where(x => x.group_name == "_NoGroup").First().processed_files_count++;
 
             dbcontext.SaveChanges();
 

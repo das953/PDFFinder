@@ -33,8 +33,10 @@ namespace PDFFinder
         public ObservableCollection<AppDescription> ApplicationList { get; set; }
         public AppDescription DefaultApplication { get; set; }
         public FileAssociationManager AssociationManager { get; set; }
+        public PdfStatisticsView StatisticView { get; set; }
         public MainWindow()
         {
+            StatisticView = new PdfStatisticsView();
             AssociationManager = new FileAssociationManager();
             ApplicationList = new ObservableCollection<AppDescription>(AssociationManager.GetAssociatedApplications(".pdf"));
          
@@ -80,6 +82,11 @@ namespace PDFFinder
         {
             CultureInfo ci = new CultureInfo("ru-RU");
             App.Language = ci;
+        }
+
+        private void btn_Stat_Click(object sender, RoutedEventArgs e)
+        {
+            StatisticView.ShowStatistics();
         }
     }
 }
